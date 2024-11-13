@@ -14,7 +14,6 @@ import (
     userUC "auction-system/internal/application/usecase/user"
 )
 
-// Моки для юзкейсов
 type mockCreateUserUC struct {
     mock.Mock
 }
@@ -81,7 +80,6 @@ func (m *mockUpdateBalanceUC) Execute(ctx context.Context, input userUC.UpdateBa
     return args.Error(0)
 }
 
-// Вспомогательные функции
 func createTestUserResponse() *dto.UserResponse {
     now := time.Now()
     return &dto.UserResponse{
@@ -93,7 +91,6 @@ func createTestUserResponse() *dto.UserResponse {
     }
 }
 
-// Проверка реализации интерфейсов
 var _ userUC.CreateUserUseCaseInterface = (*mockCreateUserUC)(nil)
 var _ userUC.GetUserUseCaseInterface = (*mockGetUserUC)(nil)
 var _ userUC.UpdateUserUseCaseInterface = (*mockUpdateUserUC)(nil)
@@ -101,7 +98,6 @@ var _ userUC.DeleteUserUseCaseInterface = (*mockDeleteUserUC)(nil)
 var _ userUC.GetAllUsersUseCaseInterface = (*mockGetAllUsersUC)(nil)
 var _ userUC.UpdateBalanceUseCaseInterface = (*mockUpdateBalanceUC)(nil)
 
-// Тесты
 func TestCreateUser(t *testing.T) {
     mockUC := new(mockCreateUserUC)
     h := &handler.UserHandler{

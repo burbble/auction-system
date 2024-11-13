@@ -2,7 +2,6 @@ package errors
 
 import "errors"
 
-// Domain errors
 var (
     ErrUserNotFound      = errors.New("user not found")
     ErrUserAlreadyExists = errors.New("user with this email already exists")
@@ -12,7 +11,6 @@ var (
     ErrInvalidPage = errors.New("invalid page parameters")
 )
 
-// Error types
 type ErrorType string
 
 const (
@@ -23,7 +21,6 @@ const (
     ErrorTypeUnauthorized  ErrorType = "UNAUTHORIZED"
 )
 
-// AppError представляет ошибку приложения
 type AppError struct {
     Type    ErrorType `json:"type"`
     Message string    `json:"message"`
@@ -34,7 +31,6 @@ func (e *AppError) Error() string {
     return e.Message
 }
 
-// New создает новую ошибку приложения
 func New(errType ErrorType, message string, err error) *AppError {
     return &AppError{
         Type:    errType,
@@ -43,7 +39,6 @@ func New(errType ErrorType, message string, err error) *AppError {
     }
 }
 
-// NewValidationError создает ошибку валидации
 func NewValidationError(message string) *AppError {
     return &AppError{
         Type:    ErrorTypeValidation,
@@ -51,7 +46,6 @@ func NewValidationError(message string) *AppError {
     }
 }
 
-// NewNotFoundError создает ошибку "не найдено"
 func NewNotFoundError(message string) *AppError {
     return &AppError{
         Type:    ErrorTypeNotFound,
@@ -59,7 +53,6 @@ func NewNotFoundError(message string) *AppError {
     }
 }
 
-// NewConflictError создает ошибку конфликта
 func NewConflictError(message string) *AppError {
     return &AppError{
         Type:    ErrorTypeConflict,

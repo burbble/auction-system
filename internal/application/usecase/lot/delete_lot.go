@@ -16,7 +16,6 @@ func NewDeleteLotUseCase(lotRepo repository.LotRepository) *DeleteLotUseCase {
 }
 
 func (uc *DeleteLotUseCase) Execute(ctx context.Context, id int64) error {
-    // Проверяем существование лота перед удалением
     _, err := uc.lotRepo.GetByID(ctx, id)
     if err != nil {
         return err
